@@ -1,8 +1,5 @@
 import { writeCSV } from "./writeFiles.js";
 import { parseDate } from "./util.js";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 /** * Fetches late arrivals at a specific station.
  * If the delay is 60 minutes or more for regional trains, it writes the data to a CSV file.
@@ -10,7 +7,7 @@ dotenv.config();
  * @param {Object} client - The client to fetch arrivals from.
  * @param {string} stationCode - The code of the station to check.
  **/
-async function getLateArrivalsAtStation(time, client, stationCode, path) {
+export async function getLateArrivalsAtStation(time, client, stationCode, path) {
   stationCode = stationCode.toString();
 
   const { arrivals, _ } = await client.arrivals(stationCode, {

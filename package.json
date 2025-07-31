@@ -1,8 +1,11 @@
 {
   "name": "delay-catcher",
   "version": "1.0.0",
-  "description": "",
+  "description": "Retrieve delays from DB API and save them to a CSV file.",
   "main": "main.js",
+  "bin": {
+    "delay-catcher": "./main.js"
+  },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

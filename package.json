@@ -4,7 +4,7 @@
   "description": "Retrieve delays from DB API and save them to a CSV file.",
   "main": "main.js",
   "bin": {
-    "delay-catcher": "./main.js"
+    "delay-catcher": "main.js"
   },
   "type": "module",
   "scripts": {

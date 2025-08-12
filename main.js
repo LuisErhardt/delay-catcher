@@ -4,6 +4,8 @@ import { getLateArrivalsAtStation } from "./src/checkArrivals.js";
 import { createClient } from "db-vendo-client";
 import { profile as dbProfile } from "db-vendo-client/p/db/index.js";
 import dotenv from "dotenv";
+import { DateTime } from "luxon";
+import { retry } from "./src/util.js";
 
 dotenv.config();
 
@@ -25,13 +27,15 @@ try {
 
   console.log(`Checking for delays with stationCode: ${stationCode}`);
 
-  const time = new Date();
+  const germanDate = DateTime.now().setZone("Europe/Berlin");
+  const time = germanDate.toJSDate();
+
   time.setDate(time.getDate() - 1);
 
   for (let i = 0; i <= 23; i++) {
     time.setHours(i, 0, 0, 0);
     console.log(`Checking arrivals on ${time.toLocaleString("de-DE")}`);
-    await getLateArrivalsAtStation(time, client, stationCode, path);
+    await retry(() => getLateArrivalsAtStation(time, client, stationCode, path));
   }
 } catch (error) {
   console.error("An error occurred:", error);

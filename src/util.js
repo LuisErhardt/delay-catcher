@@ -14,6 +14,7 @@ function parseDate(date) {
     hour: "numeric",
     minute: "numeric",
     hour12: false,
+    timeZone: "Europe/Berlin",
   }).format(date);
 
   return date;
@@ -52,7 +53,6 @@ async function retry(fn, retries = 3, delay = 2000) {
     if (retries === 0) throw error;
     console.log(`Fehler aufgetreten, versuche erneut in ${delay} ms... (${retries} Versuche übrig)`);
     await new Promise((res) => setTimeout(res, delay));
-    // exponentielles Backoff: Wartezeit verdoppeln
     return retry(fn, retries - 1, delay * 2);
   }
 }

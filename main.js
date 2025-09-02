@@ -9,13 +9,10 @@ import { retry } from "./src/util.js";
 
 dotenv.config();
 
-// 8000207 Köln Hbf
-// 8000086 Duisburg Hbf
-
 const stationCode = parseInt(process.argv[2], 10);
 
 if (isNaN(stationCode)) {
-  console.error("Please provide a valid stationCode as argument, e.g.: node main.js 8000207");
+  console.error("Please provide a valid stationCode as argument, e.g.: 8000207");
   process.exit(1);
 }
 
@@ -27,6 +24,7 @@ try {
 
   console.log(`Checking for delays with stationCode: ${stationCode}`);
 
+  // ensures that German timezone is used, even if run on a server in a different timezone
   const germanDate = DateTime.now().setZone("Europe/Berlin");
   const time = germanDate.toJSDate();
 
@@ -39,4 +37,5 @@ try {
   }
 } catch (error) {
   console.error("An error occurred:", error);
+  process.exit(1);
 }

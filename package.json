@@ -1,6 +1,6 @@
 {
   "name": "delay-catcher",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Retrieve delays from DB API and save them to a CSV file.",
   "main": "main.js",
   "bin": {
